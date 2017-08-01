@@ -1,6 +1,6 @@
 // TODO
 //
-// This can be solved just by pure logic.
+// This can be solved by hand.
 // d_1 = 1 (literally the number 1)
 // d_10 = 1 There are 0 1 digit numbers left
 // leaving 0 count for 2 digit numbers count = [1]0
