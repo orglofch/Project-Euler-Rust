@@ -1,10 +1,9 @@
 // DONE: 31875000
-
-// TODO(orglofch): This could be optimized if we expand
+//
+// This could be optimized if we expand
 // a^2 + b^2 = c^2 using the condition of a.
 
 fn pythagorean_triplet_product() -> u32 {
-  // TODO(orglofch): How do you do decreasing sequences?
   for c in 1..998 {
     for b in 1..(1000 - c) { 
       let a = 1000 - (b + c);
