@@ -1,6 +1,6 @@
 // TODO
 //
-// Another trivial dynamic programming problem.
+// Another dynamic programming problem.
 //
 // We can start at the end and work backwards due to the contraints
 // of the problem which allows us to generate the minimal path sum.

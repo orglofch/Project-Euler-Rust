@@ -1,7 +1,7 @@
-// DONE:
+// TODO:
 //
 // There's probably some nice closed form solution for this
-// but lets use a Monte-Carlo solution instead.
+// but we'll try using a Monte-Carlo solution instead.
 
 extern crate rand;
 
