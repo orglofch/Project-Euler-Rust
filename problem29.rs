@@ -3,9 +3,9 @@
 // We don't want to actually calculate the power and compare
 // as that's definitely overkill.
 //
-// We can decompose numbers into their unique prime produce
-// and apply the product / gather terms to uniquely
-// identify the numbers.
+// We can decompose numbers into their unique prime products
+// and gather terms to uniquely identify the numbers since
+// prime products are necessarily unique.
 //
 // For example, 4^2 = (2 * 2) ^2 = (2 * 2) * (2 * 2) = 2^4 etc.
 
