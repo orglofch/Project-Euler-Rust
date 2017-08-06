@@ -4,9 +4,8 @@
 // a unique prime product generated from the digits.
 //
 // Once we have a list of all prime permutation we can group them
-// into buckets and only look at those which have 3 numbers.
-//
-// Then we just need to check the difference is maintained.
+// into buckets and figure out if we can generate a sequence from
+// their elements.
 
 use std::collections::HashMap;
 
