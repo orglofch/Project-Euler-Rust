@@ -12,14 +12,20 @@ use std::collections::HashSet;
 use std::iter::FromIterator;
 
 fn is_prime(num: u32, lesser_primes: &Vec<u32>) -> bool {
-    return lesser_primes.iter().all(|&n| num % n != 0);
+    let sqrt = (num as f32).sqrt().ceil() as u32;
+    return lesser_primes
+        .iter()
+        .take_while(|&&prime| prime <= sqrt)
+        .all(|&prime| num % prime != 0);
 }
 
 /**
  * Note, we only pass the cache here, all truncation primes should be in this cache since
  * the truncation are always smaller numbers than the larger prime.
  */
-fn is_truncatable_prime(prime: u32, lesser_truncatable_primes: &HashSet<u32>, cache: &HashSet<u32>) -> bool {
+fn is_truncatable_prime(prime: u32,
+                        cache: &HashSet<u32>)
+                        -> bool {
     let digits = (prime as f32).log(10_f32) as u32;
 
     let high = prime / 10_u32.pow(digits);
@@ -31,8 +37,6 @@ fn is_truncatable_prime(prime: u32, lesser_truncatable_primes: &HashSet<u32>, ca
     if low != 3 && low != 5 && low != 7 {
         return false;
     }
-
-    // TODO(orglofch): Use lesser trunctable primes.
 
     let mut forward = prime;
     let mut backward = low;
@@ -54,16 +58,16 @@ fn is_truncatable_prime(prime: u32, lesser_truncatable_primes: &HashSet<u32>, ca
 }
 
 fn truncatable_prime_sum() -> u32 {
-    let mut cache: HashSet<u32> = HashSet::new();
+    let mut lesser_primes: Vec<u32> = Vec::new();
 
     // Add the basic numbers which don't count a truncatable.
-    cache.insert(2);
-    cache.insert(3);
-    cache.insert(5);
-    cache.insert(7);
+    lesser_primes.push(2);
+    lesser_primes.push(3);
+    lesser_primes.push(5);
+    lesser_primes.push(7);
 
-    let mut lesser_primes: Vec<u32> = Vec::from_iter(cache.iter().cloned());
-    let mut lesser_truncatable_primes: HashSet<u32> = HashSet::from_iter(cache.iter().cloned());
+    let mut cache: HashSet<u32> = HashSet::from_iter(lesser_primes.iter().cloned());
+    let mut lesser_truncatable_primes: HashSet<u32> = HashSet::from_iter(lesser_primes.iter().cloned());
 
     let mut num = 11;
     while lesser_truncatable_primes.len() < 15 {
@@ -71,8 +75,7 @@ fn truncatable_prime_sum() -> u32 {
             cache.insert(num);
             lesser_primes.push(num);
 
-            if is_truncatable_prime(num, &lesser_truncatable_primes, &cache) {
-                println!("{} is truncatable prime", num);
+            if is_truncatable_prime(num, &cache) {
                 lesser_truncatable_primes.insert(num);
             }
         }
