@@ -1,4 +1,4 @@
-// TODO
+// DONE: 427337
 //
 // Another dynamic programming problem.
 //
@@ -10,36 +10,37 @@ use std::fs::File;
 
 const MATRIX_FILE: &'static str = "p081_matrix.txt";
 
-fn load_file() -> [[u32; 5]; 5] {
-  let file = BufReader::new(File::open(MATRIX_FILE).unwrap());
+fn load_file() -> [[u32; 80]; 80] {
+    let file = BufReader::new(File::open(MATRIX_FILE).unwrap());
 
-  let mut matrix = [[0; 5]; 5];
- 
-  for (i, line) in file.lines().enumerate() {
-    for (j, number) in line.unwrap().split(char::is_whitespace).enumerate() {
-      matrix[i][j] = number.trim().parse().unwrap();
+    let mut matrix = [[0; 80]; 80];
+
+    for (i, line) in file.lines().enumerate() {
+        for (j, number) in line.unwrap().split(char::is_whitespace).enumerate() {
+            matrix[i][j] = number.trim().parse().unwrap();
+        }
     }
-  }
-  return matrix;
+    return matrix;
+}
+
+fn min_path_sum() -> u32 {
+    let mut matrix = load_file();
+
+    for r in (0..80).rev() {
+        for c in (0..80).rev() {
+            matrix[r][c] = match (r, c) {
+                (79, 79) => matrix[r][c],
+                (79, _) => matrix[r][c] + matrix[r][c + 1],
+                (_, 79) => matrix[r][c] + matrix[r + 1][c],
+                _ => {
+                    matrix[r][c] + std::cmp::min(matrix[r][c + 1], matrix[r + 1][c])
+                }
+            };
+        }
+    }
+    return matrix[0][0];
 }
 
 fn main() {
-  let matrix = load_file();
-  
-  let mut min_sum_matrix = [[0; 5]; 5];
-  
-  min_sum_matrix[4][4] = matrix[4][4];
-
-  for r in (0..5).rev() {
-    for c in (0..5).rev() {
-      min_sum_matrix[r][c] = match (r, c) {
-        (4, 4) => matrix[4][4],
-        (4, _) => matrix[r][c] + min_sum_matrix[r][c + 1],
-        (_, 4) => matrix[r][c] + min_sum_matrix[r + 1][c],
-        _ => matrix[r][c] + std::cmp::min(min_sum_matrix[r][c + 1], min_sum_matrix[r + 1][c]), 
-      };
-    }
-  }
-
-  println!("Min path sum: {}", min_sum_matrix[0][0]);
+    println!("Min path sum: {}", min_path_sum());
 }
