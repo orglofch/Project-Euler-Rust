@@ -1,7 +1,7 @@
 // DONE: 100
 //
 // Super simple just iterate the numbers of options
-// add them, and fine the GCD.
+// add them, and find the GCD.
 //
 // Notably, 0 can never be added since it results
 // in either numbers < 10 or the trivial excluded examples.
@@ -17,7 +17,7 @@ fn gcd(num: u64, den: u64) -> u64 {
     let mut b = den;
     while b != 0 {
         let t = b;
-        b = num % b;
+        b = a % b;
         a = t;
     }
     return a;
