@@ -9,15 +9,15 @@
 
 use std::collections::HashMap;
 
-/** Primes used in unique product generation. */
+#[doc = /** Primes used in unique product generation. */]
 const PRIMES: [u32; 10] = [1, 2, 3, 5, 7, 11, 13, 17, 19, 23];
 
 fn is_prime(num: u32, lesser_primes: &Vec<u32>) -> bool {
     let sqrt = (num as f32).sqrt().ceil() as u32;
     return lesser_primes
-               .iter()
-               .take_while(|&&prime| prime <= sqrt)
-               .all(|&prime| num % prime != 0);
+        .iter()
+        .take_while(|&&prime| prime <= sqrt)
+        .all(|&prime| num % prime != 0);
 }
 
 fn get_primes() -> Vec<u32> {
@@ -60,7 +60,10 @@ fn prime_permutation_concat() -> u64 {
 
     for &prime in primes.iter() {
         let product = unique_product(prime);
-        product_buckets.entry(product).or_insert(Vec::with_capacity(3)).push(prime);
+        product_buckets
+            .entry(product)
+            .or_insert(Vec::with_capacity(3))
+            .push(prime);
     }
 
     for prime_bucket in product_buckets.iter_mut() {
@@ -94,5 +97,8 @@ fn prime_permutation_concat() -> u64 {
 }
 
 fn main() {
-    println!("The other prime permutation sum is {}", prime_permutation_concat());
+    println!(
+        "The other prime permutation sum is {}",
+        prime_permutation_concat()
+    );
 }

@@ -1,0 +1,6 @@
+[package]
+name = "pe-rust"
+version = "0.1.0"
+authors = ["Owen Glofcheski <owen.glofcheski@gmail.com>"]
+
+[dependencies]
