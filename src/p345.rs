@@ -1,15 +1,12 @@
 // DONE: 13938
 //
-// The travelling salesman problem can be reinterpreted as this problem
-// where (r, c) selection define edges in the path. Therefore, the problem
-// is NP-Complete.
+// It appears the travelling salesman problem can be reinterpreted as this problem
+// where (r, c) selection define edges in the path.
 //
-// A common solution to NP-Complete problems in simulated annealing so
-// we'll use that. Note, that this converges but it still technically an
-// approximation.
+// A common solution would therefore be simulated annealing so.
+// Note, that this converges but it still technically an approximation.
 //
-// An alternate would be to formulate this problem as a graph search problem
-// and use A* search.
+// An alternate would be to formulate this problem as a graph search problem.
 
 extern crate rand;
 
