@@ -27,6 +27,7 @@
 // Therefore we can ignore the 9 and 8 length pandigitals.
 
 /// Convert a digit vector into a number.
+#[inline]
 fn as_number(digits: &Vec<u8>) -> u32 {
     let mut num = 0_u32;
     for digit in digits.iter() {
@@ -37,8 +38,7 @@ fn as_number(digits: &Vec<u8>) -> u32 {
 
 fn is_prime(num: u32) -> bool {
     let sqrt = (num as f32).sqrt().ceil() as u32;
-    return (2..(sqrt + 1))
-        .all(|other| num % other != 0);
+    return (2..(sqrt + 1)).all(|other| num % other != 0);
 }
 
 fn largest_pandigital_prime_of_length(n: usize) -> Option<u32> {
@@ -71,7 +71,6 @@ fn largest_pandigital_prime_of_length(n: usize) -> Option<u32> {
             break;
         }
 
-        // Note, we offset l by one to detect runover.
         let mut l = n;
         for i in (k + 1)..n {
             if permutation[k] > permutation[i] {
@@ -100,5 +99,8 @@ fn largest_pandigital_prime() -> u32 {
 }
 
 fn main() {
-    println!("The largest pandigital prime is {}", largest_pandigital_prime());
+    println!(
+        "The largest pandigital prime is {}",
+        largest_pandigital_prime()
+    );
 }
